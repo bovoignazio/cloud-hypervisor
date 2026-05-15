@@ -270,6 +270,12 @@ pub struct MemoryZoneConfig {
     pub reserve: Option<bool>,
     #[serde(default)]
     pub mergeable: bool,
+    #[serde(default)]
+    pub skip_snapshot: bool,
+
+    // Not serialized/deserialized, as it is populated via ExternalFdsConfig.
+    #[serde(skip)]
+    pub fd: Option<i32>,
 }
 
 impl ApplyLandlock for MemoryZoneConfig {

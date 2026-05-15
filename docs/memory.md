@@ -261,11 +261,12 @@ struct MemoryZoneConfig {
     prefault: bool,
     reserve: Option<bool>,
     mergeable: bool,
+    skip_snapshot: bool,
 }
 ```
 
 ```
---memory-zone <memory-zone>	User defined memory zone parameters "size=<guest_memory_region_size>,file=<backing_file>,shared=on|off,hugepages=on|off,hugepage_size=<hugepage_size>,host_numa_node=<node_id>,id=<zone_identifier>,hotplug_size=<hotpluggable_memory_size>,hotplugged_size=<hotplugged_memory_size>,prefault=on|off,reserve=on|off,mergeable=on|off"
+--memory-zone <memory-zone>	User defined memory zone parameters "size=<guest_memory_region_size>,file=<backing_file>,shared=on|off,hugepages=on|off,hugepage_size=<hugepage_size>,host_numa_node=<node_id>,id=<zone_identifier>,hotplug_size=<hotpluggable_memory_size>,hotplugged_size=<hotplugged_memory_size>,prefault=on|off,reserve=on|off,mergeable=on|off,skip_snapshot=on|off"
 ```
 
 This parameter expects one or more occurrences, allowing for a list of memory
@@ -532,6 +533,19 @@ _Example_
 ```
 --memory size=0
 --memory-zone id=mem0,size=1G,mergeable=on
+```
+### `skip_snapshot`
+
+Specifies if the memory zone should be skipped during snapshot operations.
+This can be useful for memory zones that are backed by memfds.
+
+By default this option is turned off.
+
+_Example_
+
+```
+--memory size=0
+--memory-zone id=mem0,size=1G,skip_snapshot=on
 ```
 
 ## NUMA settings
